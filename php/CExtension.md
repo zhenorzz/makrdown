@@ -117,10 +117,13 @@ hello(name);
     zval *arr, **data;
     HashTable *arr_hash;
     HashPosition pointer;
+    int i,length;
     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a", &arr) == FAILURE)
         RETURN_FALSE;
     //循环数组
     arr_hash = Z_ARRVAL_P(arr);
+    //数组长度
+    length = arr_hash->nNumOfElements;
     for(zend_hash_internal_pointer_reset_ex(arr_hash, &pointer); 
     zend_hash_get_current_data_ex(arr_hash, (void**) &data, &pointer) == SUCCESS; 
     zend_hash_move_forward_ex(arr_hash, &pointer)) {
